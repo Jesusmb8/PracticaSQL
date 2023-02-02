@@ -16,8 +16,8 @@
 -- j: revisiones 
 
 
-select a.id_coche, a.dt_compra as "Fecha de compra", a.matricula as Matrícula,a.total_km as "Total de km",b.nombre as Modelo,c.nombre as Marca ,d.nombre as "Grupo",e.nombre  as Color,
-f.dt_baja as "Fecha baja poliza", g.id_poliza as "Número de poliza", h.nombre as Aseguradora, max(j.km)
+select b.nombre as "Nombre modelo", c.nombre as "Marca",d.nombre as "Grupo", a.dt_compra as "Fecha de compra" , a.matricula as "Matrícula" ,e.nombre  as Color,
+	  max(j.km) as "Total km", h.nombre as "Aseguradora",g.id_poliza as "Número de poliza"
 from practica.coches a 
 inner join practica.modelos b on a.id_modelo = b.id_modelo
 inner join practica.marcas c on  c.id_marca = b.id_marca
@@ -30,5 +30,5 @@ inner join practica.historico_coches_revisiones i on i.id_coche  = a.id_coche
 inner join practica.revisiones j on j.id_revision = i.id_revision 
 where a.dt_baja is null 
 	and f.dt_baja is null	
-group by a.id_coche,b.nombre,c.nombre,d.nombre,e.nombre,f.dt_baja,g.id_poliza,h.nombre	;
+group by a.id_coche,b.nombre,c.nombre,d.nombre,e.nombre,f.dt_baja,g.id_poliza,h.nombre;
 

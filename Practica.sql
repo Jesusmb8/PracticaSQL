@@ -106,7 +106,6 @@ create table practica.coches(
 	nombre varchar(30) not null,
 	matricula varchar(10) not null,
 	id_modelo varchar(10) not null,--FK
-	total_km varchar(10) not null,
 	dt_compra date not null,
 	dt_baja date null	
 );

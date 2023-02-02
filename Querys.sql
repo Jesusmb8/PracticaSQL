@@ -3,15 +3,32 @@
 
 
 -- obtener último por fecha.
+
 -- a: coche
 -- b: modelos
 -- c: marcas
 -- d: grupos
 -- e: color
-select a.dt_compra, a.matricula,a.total_km,b.nombre,c.nombre,d.nombre,e.nombre  
+-- f: historico_coches_polizas
+-- g: polizas
+-- h: aseguradora
+-- i: historico coches revisiones
+-- j: revisiones 
+
+
+select a.id_coche, a.dt_compra as "Fecha de compra", a.matricula as Matrícula,a.total_km as "Total de km",b.nombre as Modelo,c.nombre as Marca ,d.nombre as "Grupo",e.nombre  as Color,
+f.dt_baja as "Fecha baja poliza", g.id_poliza as "Número de poliza", h.nombre as Aseguradora, max(j.km)
 from practica.coches a 
 inner join practica.modelos b on a.id_modelo = b.id_modelo
 inner join practica.marcas c on  c.id_marca = b.id_marca
 inner join practica.grupos d on  d.id_grupo = c.id_grupo
 inner join practica.colores e on e.id_color = a.id_color 
-where a.dt_baja is null ;
+inner join practica.historico_coches_polizas f on f.id_coche  = a.id_coche  
+inner join practica.polizas g on g.id_poliza  = f.id_poliza  
+inner join practica.aseguradoras h on h.id_aseguradora  = g.id_aseguradora  
+inner join practica.historico_coches_revisiones i on i.id_coche  = a.id_coche 
+inner join practica.revisiones j on j.id_revision = i.id_revision 
+where a.dt_baja is null 
+	and f.dt_baja is null	
+group by a.id_coche,b.nombre,c.nombre,d.nombre,e.nombre,f.dt_baja,g.id_poliza,h.nombre	;
+

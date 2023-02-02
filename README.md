@@ -1,0 +1,2 @@
+# PracticaSQL
+Práctica módulo SQL
